@@ -1,0 +1,75 @@
+{
+  "api": {
+    "at": "2026-11-07T01:20:14.989Z",
+    "endpoint": "/api/board",
+    "requests": 50,
+    "concurrency": 10,
+    "p50Ms": 43.18,
+    "p95Ms": 78.17,
+    "p99Ms": 82.56,
+    "errors": 0,
+    "meanResponseBytes": 1866,
+    "scope": "Short local Docker API read smoke: 50 requests at concurrency 10 with live collector/worker; not sustained or peak capacity."
+  },
+  "workerRecovery": {
+    "at": "2026-11-07T01:22:22.858Z",
+    "fault": "SIGKILL after database commit before Kafka offset commit",
+    "gaps": [
+      {
+        "topic": "hopahead.mbta.predictions.v1",
+        "dbNext": "176",
+        "kafkaNext": "175"
+      }
+    ],
+    "health": [
+      {
+        "source": "alerts",
+        "health": {
+          "topic": "hopahead.mbta.alerts.v1",
+          "offset": "23",
+          "revision": 4,
+          "partition": 0,
+          "capturedAt": "2026-11-07T01:21:36.378Z",
+          "generation": 2,
+          "observedAt": "2026-11-07T01:21:36.365Z",
+          "projectedAt": "2026-11-07T01:21:36.416Z",
+          "lastModified": "2026-11-07T01:21:05.000Z"
+        }
+      },
+      {
+        "source": "predictions",
+        "health": {
+          "topic": "hopahead.mbta.predictions.v1",
+          "offset": "175",
+          "revision": 16,
+          "partition": 0,
+          "capturedAt": "2026-11-07T01:22:21.561Z",
+          "generation": 2,
+          "observedAt": "2026-11-07T01:22:21.462Z",
+          "projectedAt": "2026-11-07T01:22:22.131Z",
+          "lastModified": "2026-11-07T01:22:07.000Z"
+        }
+      }
+    ],
+    "recoveredAt": "2026-11-07T01:23:21.814Z",
+    "recoveredOffsets": [
+      {
+        "topic": "hopahead.mbta.predictions.v1",
+        "partitions": [
+          {
+            "partition": 0,
+            "offset": "179",
+            "metadata": null
+          }
+        ]
+      }
+    ],
+    "duplicateReceipts": 0,
+    "recoverySeconds": 58.956
+  },
+  "brokerRestart": {
+    "startedAt": "2026-11-07T01:21:29.564020302Z",
+    "verified": "Retained source topic resumed beyond prediction offset159 after restart; same collector generation2 continued through offset187.",
+    "scope": "One broker process restart with persistent Docker volume; not host or disk loss."
+  }
+}

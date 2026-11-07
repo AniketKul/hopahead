@@ -1,0 +1,9 @@
+.git
+.worktrees
+.local
+.env
+node_modules
+dist
+test-results
+playwright-report
+*.log

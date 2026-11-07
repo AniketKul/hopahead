@@ -1,0 +1,64 @@
+{
+  "version": "mbta-gtfs-sha256:ec5b30090282850a9c8c34698ff496bfbb06c7fad4434f263eb4c00ccee34418",
+  "source": "https://cdn.mbta.com/MBTA_GTFS.zip",
+  "importedAt": "2026-11-07T01:00:11.562747+00:00",
+  "minima": {
+    "70196": 152,
+    "70197": 184,
+    "70198": 152,
+    "70199": 184
+  },
+  "feedVersion": "Fall 2026, 2026-11-03T23:46:00+00:00, version D",
+  "feedStartDate": "20261027",
+  "feedEndDate": "20261212",
+  "sourceRecords": [
+    {
+      "from_stop_id": "70075",
+      "to_stop_id": "70196",
+      "transfer_type": "2",
+      "min_transfer_time": "152",
+      "min_walk_time": "62",
+      "min_wheelchair_time": "130",
+      "suggested_buffer_time": "90",
+      "wheelchair_transfer": "1",
+      "from_trip_id": "",
+      "to_trip_id": ""
+    },
+    {
+      "from_stop_id": "70075",
+      "to_stop_id": "70197",
+      "transfer_type": "2",
+      "min_transfer_time": "184",
+      "min_walk_time": "94",
+      "min_wheelchair_time": "171",
+      "suggested_buffer_time": "90",
+      "wheelchair_transfer": "1",
+      "from_trip_id": "",
+      "to_trip_id": ""
+    },
+    {
+      "from_stop_id": "70075",
+      "to_stop_id": "70198",
+      "transfer_type": "2",
+      "min_transfer_time": "152",
+      "min_walk_time": "62",
+      "min_wheelchair_time": "130",
+      "suggested_buffer_time": "90",
+      "wheelchair_transfer": "1",
+      "from_trip_id": "",
+      "to_trip_id": ""
+    },
+    {
+      "from_stop_id": "70075",
+      "to_stop_id": "70199",
+      "transfer_type": "2",
+      "min_transfer_time": "184",
+      "min_walk_time": "94",
+      "min_wheelchair_time": "171",
+      "suggested_buffer_time": "90",
+      "wheelchair_transfer": "1",
+      "from_trip_id": "",
+      "to_trip_id": ""
+    }
+  ]
+}

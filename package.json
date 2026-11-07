@@ -1,0 +1,38 @@
+{
+  "name": "hopahead",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22.22"
+  },
+  "scripts": {
+    "dev": "vite --host 127.0.0.1",
+    "build": "tsc --noEmit && vite build",
+    "typecheck": "tsc --noEmit",
+    "test": "node --import tsx --test tests/*.test.ts",
+    "test:integration": "node --import tsx --test tests/integration/*.test.ts",
+    "test:browser": "playwright test",
+    "api": "tsx src/server/api.ts",
+    "worker": "tsx src/server/worker.ts",
+    "collector": "tsx src/server/collector.ts",
+    "relay": "tsx src/server/relay.ts",
+    "migrate": "tsx src/server/migrate.ts"
+  },
+  "dependencies": {
+    "kafkajs": "2.2.4",
+    "pg": "8.23.1",
+    "react": "19.3.1",
+    "react-dom": "19.3.1"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.65.0",
+    "@types/node": "22.19.15",
+    "@types/pg": "8.16.0",
+    "@types/react": "19.2.14",
+    "@types/react-dom": "19.2.3",
+    "tsx": "4.23.15",
+    "typescript": "5.9.3",
+    "vite": "7.3.7"
+  }
+}

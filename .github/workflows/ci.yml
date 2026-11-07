@@ -1,0 +1,61 @@
+name: checks
+on:
+  push:
+    paths-ignore: ['docs/**']
+  pull_request:
+    paths-ignore: ['docs/**']
+permissions:
+  contents: read
+jobs:
+  unit-build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22.22.2'
+          cache: npm
+      - run: npm ci
+      - run: npm test
+      - run: python3 -m unittest discover -s tests -p 'test_*.py'
+      - run: npm run build
+      - run: npm audit --omit=dev
+  integration-browser:
+    runs-on: ubuntu-latest
+    env:
+      DATABASE_URL: postgres://hopahead:hopahead-ci@127.0.0.1:55432/hopahead
+      KAFKA_BROKERS: 127.0.0.1:19092
+      SESSION_SECRET: ci-only-session-secret-with-more-than-32-characters
+      PUBLIC_ORIGIN: http://localhost:3000
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22.22.2'
+          cache: npm
+      - run: npm ci
+      - name: Configure disposable services
+        run: |
+          python3 - <<'PY'
+          import os
+          with open('.env', 'x') as f:
+              f.write('POSTGRES_PASSWORD=hopahead-ci\n')
+              f.write('SESSION_SECRET='+os.environ['SESSION_SECRET']+'\n')
+              f.write('PUBLIC_ORIGIN='+os.environ['PUBLIC_ORIGIN']+'\n')
+          PY
+          docker compose -f compose.yaml -f config/compose.dev.yaml up -d --wait postgres kafka
+      - run: npm run test:integration
+      - run: npm run build
+      - run: npx playwright install --with-deps chromium
+      - name: Serve web app
+        run: |
+          npm run api > /tmp/hopahead-api.log 2>&1 &
+          for attempt in $(seq 1 30); do
+            if curl --fail --silent http://localhost:3000/api/health; then exit 0; fi
+            sleep 1
+          done
+          cat /tmp/hopahead-api.log
+          exit 1
+      - run: npm run test:browser
+      - if: always()
+        run: docker compose -f compose.yaml -f config/compose.dev.yaml down
