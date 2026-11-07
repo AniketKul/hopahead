@@ -6,6 +6,12 @@ HopAhead monitors a Boston transit journey from **Harvard → Park Street → Co
 
 The same decision function powers live advice and an interactive disruption replay. Every material recommendation retains the predictions, rule version, transfer data and evaluation time that produced it.
 
+## Demo
+
+A 90-second, captioned walkthrough: follow a live MBTA journey, inspect saved decision evidence, and explore simulated cancellations, stale data, and recovery.
+
+https://github.com/user-attachments/assets/b37ccd9b-63f2-4192-a064-a30c1fe3cc13
+
 ## What you can try
 
 - Select a Red Line departure, set your extra transfer time, and pin a preferred Green Line connection.
