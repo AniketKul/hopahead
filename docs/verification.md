@@ -2,6 +2,10 @@
 
 Verified locally on November 6, 2026, Pacific time (November 7 UTC). This is an initial single-host release, not a production capacity certification.
 
+Published source: [`97b7b8e`](https://github.com/AniketKul/hopahead/commit/97b7b8ed6f546ef6ba8f7f88ef1f345d8ba70ed7). Both GitHub Actions jobs passed in [run 42324127829](https://github.com/AniketKul/hopahead/actions/runs/42324127829): unit/build/audit and real Kafka/PostgreSQL integration/browser checks. CI runs the seven deterministic browser tests; the opt-in live MBTA test was verified locally. This receipt update changes documentation only.
+
+After the final Docker rebuild, `/api/health` and `/api/board` both returned HTTP 200 at 01:29 UTC on November 7. The board exposed an actual upcoming Harvard departure and a complete source observation captured less than three seconds earlier.
+
 ## Functional checks
 
 | Check | Result |
