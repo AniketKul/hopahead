@@ -105,7 +105,6 @@ export function App() {
               </p>
             </div>
             <div className="hero-note">
-              <span aria-hidden="true">↗</span>
               <p>
                 One journey.
                 <br />

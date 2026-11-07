@@ -190,6 +190,31 @@ async function fixture(
   return commands;
 }
 
+test("hero note text does not overlap at desktop and tablet widths", async ({ page }) => {
+  await fixture(page);
+  for (const width of [1440, 1024, 761]) {
+    await page.setViewportSize({ width, height: 900 });
+    const note = page.locator(".hero-note");
+    await expect(note).toBeVisible();
+    const collisions = await note.evaluate((element) => {
+      const walker = document.createTreeWalker(element, NodeFilter.SHOW_TEXT);
+      const boxes: { text: string; rect: DOMRect }[] = [];
+      while (walker.nextNode()) {
+        const text = walker.currentNode.textContent?.trim();
+        if (!text) continue;
+        const range = document.createRange();
+        range.selectNodeContents(walker.currentNode);
+        for (const rect of range.getClientRects()) boxes.push({ text, rect });
+      }
+      return boxes.flatMap((a, index) => boxes.slice(index + 1)
+        .filter((b) => Math.min(a.rect.right, b.rect.right) > Math.max(a.rect.left, b.rect.left)
+          && Math.min(a.rect.bottom, b.rect.bottom) > Math.max(a.rect.top, b.rect.top))
+        .map((b) => [a.text, b.text]));
+    });
+    expect(collisions, `Overlapping hero text at ${width}px`).toEqual([]);
+  }
+});
+
 test("keyboard journey setup saves the pinned train and personal allowance", async ({
   page,
 }) => {
